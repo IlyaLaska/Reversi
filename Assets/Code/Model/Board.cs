@@ -68,14 +68,14 @@ public class Board
     }
     private HashSet<int[]> getValidMovesForAPiece(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
     {
-        Debug.Log("Input: ");
-        Debug.Log(currentPlayer);
-        Debug.Log("X: " + boardSquareCoordinates[0] + "Y: " + boardSquareCoordinates[1]);
+        //Debug.Log("Input: ");
+        //Debug.Log(currentPlayer);
+        //Debug.Log("X: " + boardSquareCoordinates[0] + "Y: " + boardSquareCoordinates[1]);
 
         HashSet<int[]> validMovesList = new HashSet<int[]>();
         int[] tempCoord;
         //check NW
-        Debug.Log("Checking NW");
+        //Debug.Log("Checking NW");
         if (boardSquareCoordinates[0] > 0 && boardSquareCoordinates[1] > 0)
         {
             tempCoord = (int[]) boardSquareCoordinates.Clone();
@@ -88,32 +88,33 @@ public class Board
                      board[tempCoord[0], tempCoord[1]].belongsToPlayer != currentPlayer);//next piece belongs to enemy
             if ((tempCoord[0] != boardSquareCoordinates[0]-1 && tempCoord[1] != boardSquareCoordinates[1] - 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
             {
-                Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+                //Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.NW });
             }
         }
         //check N
-        Debug.Log("Checking N");
+        //Debug.Log("Checking N");
         if (boardSquareCoordinates[1] > 0)
         {
             //tempCoord = boardSquareCoordinates;
             tempCoord = (int[])boardSquareCoordinates.Clone();
 
-            Debug.Log("temp X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+            //Debug.Log("temp X: " + tempCoord[0] + "Y: " + tempCoord[1]);
             do
             {
                 //tempCoord[0] -= 1;
                 tempCoord[1] -= 1;
             } while ((tempCoord[1] > 0) && board[tempCoord[0], tempCoord[1]].belongsToPlayer != PlayerEnum.none &&
                      board[tempCoord[0], tempCoord[1]].belongsToPlayer != currentPlayer);//next piece belongs to enemy
-            if ((tempCoord[0] != boardSquareCoordinates[0] && tempCoord[1] != boardSquareCoordinates[1] - 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
+            //Debug.Log("Ended in: X:" + tempCoord[0] + "Y: " + tempCoord[1]);
+            if ((tempCoord[1] != boardSquareCoordinates[1] - 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
             {
-                Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+                //Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.N});
             }
         }
         //check NE
-        Debug.Log("Checking NE");
+        //Debug.Log("Checking NE");
         if (boardSquareCoordinates[0] < boardLength && boardSquareCoordinates[1] > 0)
         {
             //tempCoord = boardSquareCoordinates;
@@ -127,7 +128,7 @@ public class Board
                      board[tempCoord[0], tempCoord[1]].belongsToPlayer != currentPlayer);//next piece belongs to enemy
             if ((tempCoord[0] != boardSquareCoordinates[0] + 1 && tempCoord[1] != boardSquareCoordinates[1] - 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
             {
-                Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+                //Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.NE});
             }
         }
@@ -143,7 +144,7 @@ public class Board
                 //tempCoord[1] -= 1;
             } while ((tempCoord[0] < boardLength) && board[tempCoord[0], tempCoord[1]].belongsToPlayer != PlayerEnum.none &&
                      board[tempCoord[0], tempCoord[1]].belongsToPlayer != currentPlayer);//next piece belongs to enemy
-            if ((tempCoord[0] != boardSquareCoordinates[0] + 1 && tempCoord[1] != boardSquareCoordinates[1]) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
+            if ((tempCoord[0] != boardSquareCoordinates[0] + 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
             {
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.E});
             }
@@ -177,7 +178,7 @@ public class Board
                 tempCoord[1] += 1;
             } while ((tempCoord[1] < boardLength) && board[tempCoord[0], tempCoord[1]].belongsToPlayer != PlayerEnum.none &&
                      board[tempCoord[0], tempCoord[1]].belongsToPlayer != currentPlayer);//next piece belongs to enemy
-            if ((tempCoord[0] != boardSquareCoordinates[0] && tempCoord[1] != boardSquareCoordinates[1] + 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
+            if ((tempCoord[1] != boardSquareCoordinates[1] + 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
             {
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.S});
             }
@@ -211,13 +212,13 @@ public class Board
                 //tempCoord[1] -= 1;
             } while ((tempCoord[0] > 0) && board[tempCoord[0], tempCoord[1]].belongsToPlayer != PlayerEnum.none &&
                      board[tempCoord[0], tempCoord[1]].belongsToPlayer != currentPlayer);//next piece belongs to enemy
-            if ((tempCoord[0] != boardSquareCoordinates[0] - 1 && tempCoord[1] != boardSquareCoordinates[1]) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
+            if ((tempCoord[0] != boardSquareCoordinates[0] - 1) && board[tempCoord[0], tempCoord[1]].belongsToPlayer == PlayerEnum.none)//encountered empty place
             {
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.W});
             }
         }
-        Debug.Log("Valids:");
-        Debug.Log(validMovesList.Count);
+        //Debug.Log("Valids:");
+        //Debug.Log(validMovesList.Count);
         return validMovesList;
     }
 
@@ -229,7 +230,8 @@ public class Board
         //int[] tempCoords = { 0, 0 };
         foreach (var move in validMoves)
         {
-            if(move[3] == (int) Direction.NW)//move in opposite direction and count flipped Pieces on the way
+            Debug.Log("WWWWWWWWWWW: " + move[0] + " , " + move[0] + " , " + move[0] + " , ");
+            if(move[2] == (int) Direction.NW)//move in opposite direction and count flipped Pieces on the way
             {
                 if(currentTurn == PlayerEnum.black)
                 {
@@ -250,7 +252,7 @@ public class Board
                         move[1]++;
                     }
                 }
-            } else if (move[3] == (int)Direction.N)
+            } else if (move[2] == (int)Direction.N)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -273,7 +275,7 @@ public class Board
                     }
                 }
             }
-            else if(move[3] == (int)Direction.NE)
+            else if(move[2] == (int)Direction.NE)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -296,7 +298,7 @@ public class Board
                     }
                 }
             }
-            else if(move[3] == (int)Direction.E)
+            else if(move[2] == (int)Direction.E)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -319,7 +321,7 @@ public class Board
                     }
                 }
             }
-            else if(move[3] == (int)Direction.SE)
+            else if(move[2] == (int)Direction.SE)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -342,7 +344,7 @@ public class Board
                     }
                 }
             }
-            else if(move[3] == (int)Direction.S)
+            else if(move[2] == (int)Direction.S)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -365,7 +367,7 @@ public class Board
                     }
                 }
             }
-            else if(move[3] == (int)Direction.SW)
+            else if(move[2] == (int)Direction.SW)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -388,7 +390,7 @@ public class Board
                     }
                 }
             }
-            else if(move[3] == (int)Direction.W)
+            else if(move[2] == (int)Direction.W)
             {
                 if (currentTurn == PlayerEnum.black)
                 {
@@ -417,3 +419,7 @@ public class Board
         return changedPieces;
     }
 }
+
+
+
+

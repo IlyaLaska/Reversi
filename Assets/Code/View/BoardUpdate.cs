@@ -57,10 +57,12 @@ public class BoardUpdate : MonoBehaviour
                     //Update Piece - Destroy old
                     if (curProps.pieceColor == PlayerEnum.white)
                     {
-                        Destroy(curProps.PieceOWhite);
+                        //curProps.PieceOWhite.gameObject.SetActive(false);
+                        Destroy(curProps.PieceOWhite.gameObject);
                     } else if (curProps.pieceColor == PlayerEnum.black)
                     {
-                        Destroy(curProps.PieceOBlack);
+                        //curProps.PieceOBlack.gameObject.SetActive(false);
+                        Destroy(curProps.PieceOBlack.gameObject);
                     }
                     //change to correct value
                     curProps.pieceColor = board.board[x, y].belongsToPlayer;

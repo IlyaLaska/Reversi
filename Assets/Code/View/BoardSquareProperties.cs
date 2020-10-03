@@ -12,6 +12,7 @@ public class BoardSquareProperties : MonoBehaviour
     public int yPos = 0;
     //public bool hasPiece = false;
     public PlayerEnum pieceColor = PlayerEnum.none;
+    public GameObject pieceO;
 
     public delegate void MouseDownEvent(int xPos, int yPos);
     public static event MouseDownEvent BoardSquareClicked;
