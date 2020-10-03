@@ -9,7 +9,8 @@ public class Board
 
 	public Board()
 	{
-		board = new BoardSquare[boardLength, boardLength];
+		this.board = new BoardSquare[boardLength, boardLength];
+        initBoard();
 	}
 
 	public void initBoard()
@@ -18,16 +19,16 @@ public class Board
         {
             for (int j = 0; j < boardLength; j++)
             {
-                board[i,j] = new BoardSquare();
+                this.board[i, j] = new BoardSquare();
             }
         }
 
         //Add starting Pieces
-        board[3, 3].belongsToPlayer = PlayerEnum.white;
-        board[4, 4].belongsToPlayer = PlayerEnum.white;
+        this.board[3, 3].belongsToPlayer = PlayerEnum.white;
+        this.board[4, 4].belongsToPlayer = PlayerEnum.white;
 
-        board[3, 4].belongsToPlayer = PlayerEnum.black;
-        board[4, 3].belongsToPlayer = PlayerEnum.black;
+        this.board[3, 4].belongsToPlayer = PlayerEnum.black;
+        this.board[4, 3].belongsToPlayer = PlayerEnum.black;
     }
     public int[][] getValidMovesList(PlayerEnum currentPlayer)
     {

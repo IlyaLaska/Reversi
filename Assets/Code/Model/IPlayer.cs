@@ -2,8 +2,8 @@
 
 public interface IPlayer
 {
-    public int score { get; set; }
-    public PlayerEnum color { get; set; }
+    int score { get; set; }
+    PlayerEnum color { get; set; }
 
-    public int[] getMove(int[][] validMoves);
+    int[] getMove(int[][] validMoves);
 }
