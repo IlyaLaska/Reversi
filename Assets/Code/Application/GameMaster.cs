@@ -20,11 +20,17 @@ public class GameMaster : MonoBehaviour
         gameO = new Game(playerWhite, playerBlack);
         boardUpdateO = GameObject.FindObjectOfType<BoardUpdate>();
         boardUpdateO.setBoard(gameO.gameBoard);
+        boardSquarePropertiesO = GameObject.FindObjectOfType<BoardSquareProperties>();
+        //boardSquarePropertiesO.setGame(gameO);
+        //Debug.Log("AAAA");
+        //Debug.Log(boardSquarePropertiesO.game);
+        gameO.gameBoard.initBoard();
     }
     // Update is called once per frame
     void Update()
     {
 
     }
-   
+
 }
+

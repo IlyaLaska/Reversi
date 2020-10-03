@@ -39,13 +39,29 @@ public class BoardUpdate : MonoBehaviour
         {
             for (int x = 0; x < 8; x++)
             {
-                if(board.board[x,y].belongsToPlayer != squares[x,y].GetComponent<BoardSquareProperties>().pieceColor)
+                BoardSquareProperties curProps = squares[x, y].GetComponent<BoardSquareProperties>();
+                //Debug.Log(curProps);
+                if (board.board[x,y].belongsToPlayer != curProps.pieceColor)
                 {
-                    //Update Piece
-                    Destroy (squares[x, y].GetComponent<BoardSquareProperties>().PieceO);
-
+                    //Update Piece - Create New
+                    if (board.board[x,y].belongsToPlayer == PlayerEnum.white)
+                    {
+                        Instantiate(curProps.PieceOWhite, curProps.transform.position, curProps.PieceOWhite.rotation);
+                    }
+                    else if (board.board[x,y].belongsToPlayer == PlayerEnum.black)
+                    {
+                        Instantiate(curProps.PieceOBlack, curProps.transform.position, curProps.PieceOBlack.rotation); ;
+                    }
+                    //Update Piece - Destroy old
+                    if (curProps.pieceColor == PlayerEnum.white)
+                    {
+                        Destroy(curProps.PieceOWhite);
+                    } else if (curProps.pieceColor == PlayerEnum.black)
+                    {
+                        Destroy(curProps.PieceOBlack);
+                    }
                     //change to correct value
-                    squares[x, y].GetComponent<BoardSquareProperties>().pieceColor = board.board[x, y].belongsToPlayer;
+                    curProps.pieceColor = board.board[x, y].belongsToPlayer;
                 }
             }
         }

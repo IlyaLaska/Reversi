@@ -4,11 +4,11 @@ using System.Numerics;
 
 public class Game
 {
-	public Board gameBoard = new Board();
-	public PlayerEnum currentTurn = PlayerEnum.black;
+	public Board gameBoard;
+	public PlayerEnum currentTurn;
 	public IPlayer black;
 	public IPlayer white;
-	public int[][] validMovesForThisTurn;
+	public int[][] validMovesAndDirsForThisTurn;
 	public int moveCounter = 0;
     public bool gameIsOver = false;
 
@@ -20,13 +20,16 @@ public class Game
 	{
 		black = first;
 		white = second;
-	}
+        gameBoard = new Board();
+        currentTurn = PlayerEnum.black;
+        //this.playRound();
+    }
 
 	public void playRound()
     {
 		//get valid moves list
-		this.validMovesForThisTurn = gameBoard.getValidMovesList(currentTurn);
-        if(this.validMovesForThisTurn.Length < 1)
+		this.validMovesAndDirsForThisTurn = gameBoard.getValidMovesList(currentTurn);
+        if(this.validMovesAndDirsForThisTurn.Length < 1)
         {
             if (isMaxScore())
             {
@@ -48,16 +51,16 @@ public class Game
 
         //get coordinates of next move
 
-        int[] selectedSquare = currentPlayer.getMove(this.validMovesForThisTurn);
+        int[] selectedSquare = currentPlayer.getMove(this.validMovesAndDirsForThisTurn);
 
         
         List<int[]> takenMoves = new List<int[]>();
         //list of taken moves (coordinates same, direction different)
-        for (int i = 0; i < validMovesForThisTurn.Length; i++)
+        for (int i = 0; i < validMovesAndDirsForThisTurn.Length; i++)
         {
-            if (validMovesForThisTurn[i][0] == selectedSquare[0] && validMovesForThisTurn[i][0] == selectedSquare[0])//one of valids
+            if (validMovesAndDirsForThisTurn[i][0] == selectedSquare[0] && validMovesAndDirsForThisTurn[i][1] == selectedSquare[1])//one of valids
             {
-                takenMoves.Add(validMovesForThisTurn[i]);
+                takenMoves.Add(validMovesAndDirsForThisTurn[i]);
             }
         }
         if (takenMoves.Count == 0)//no allowed moves
@@ -76,7 +79,7 @@ public class Game
         }
         else black.score -= beatPiecesCount;
 
-
+        currentTurn = currentTurn == PlayerEnum.black ? PlayerEnum.white : PlayerEnum.black;
         playRound();
     }
 

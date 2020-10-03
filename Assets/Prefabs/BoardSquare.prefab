@@ -134,6 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3de0f262e97de46b4e830396bb2a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PieceO: {fileID: 4221245728845398011, guid: 03ad766ab4ce9b6498cceb248174e4a7, type: 3}
+  PieceOWhite: {fileID: 4221245728845398011, guid: 03ad766ab4ce9b6498cceb248174e4a7,
+    type: 3}
+  PieceOBlack: {fileID: 7292959906205800724, guid: 3f8c62573c1e6c4419767577eb42d2e9,
+    type: 3}
   xPos: 7
   yPos: 7
+  pieceColor: 0

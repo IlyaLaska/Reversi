@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Debug = UnityEngine.Debug;
 
 public class Board
 {
@@ -15,7 +17,6 @@ public class Board
     public Board()
 	{
 		this.board = new BoardSquare[boardLength, boardLength];
-        initBoard();
 	}
 
 	public void initBoard()
@@ -36,6 +37,7 @@ public class Board
         this.board[4, 3].belongsToPlayer = PlayerEnum.black;
 
         boardUpdateEvent();
+        Debug.Log("Called boardUpdateEvent");
     }
     public int[][] getValidMovesList(PlayerEnum currentPlayer)
     {
