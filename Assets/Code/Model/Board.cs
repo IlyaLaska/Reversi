@@ -66,7 +66,7 @@ public class Board
         Debug.Log(validMovesList.Count);
         return validMovesList.ToArray();
     }
-    private HashSet<int[]> getValidMovesForAPiece(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
+    private HashSet<int[]> getValidMovesForAPieceO(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
     {
         //Debug.Log("Input: ");
         //Debug.Log(currentPlayer);
@@ -221,6 +221,113 @@ public class Board
         //Debug.Log(validMovesList.Count);
         return validMovesList;
     }
+
+    private HashSet<int[]> getValidMovesForAPiece(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
+    {
+        //Debug.Log("Input: ");
+        //Debug.Log(currentPlayer);
+        //Debug.Log("X: " + boardSquareCoordinates[0] + "Y: " + boardSquareCoordinates[1]);
+
+        HashSet<int[]> validMovesList = new HashSet<int[]>();
+        int[] tempCoord;
+
+        //check NW
+        //Debug.Log("Checking NW");
+
+        // NW [-1,-1]
+        int[] array;
+
+        array = succesfulMoveInDiraction(boardSquareCoordinates, -1, -1, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+            {
+                //Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+                validMovesList.Add(new int[] { array[1], array[2], (int)Direction.NW });
+            }
+
+        //check N [-1, 0]
+        //Debug.Log("Checking N");
+        array = succesfulMoveInDiraction(boardSquareCoordinates, -1, 0, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+        {
+            //Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+            validMovesList.Add(new int[] { array[1], array[2], (int)Direction.N });
+        }
+        //check NE [+1,-1]
+        //Debug.Log("Checking NE");
+
+        array = succesfulMoveInDiraction(boardSquareCoordinates, 1, -1, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+            {
+                //Debug.Log("Adding: X: " + tempCoord[0] + "Y: " + tempCoord[1]);
+                validMovesList.Add(new int[] { array[1], array[2], (int)Direction.N });
+            }
+
+        //check E[0,1]
+        array = succesfulMoveInDiraction(boardSquareCoordinates, 0, 1, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+            {
+                validMovesList.Add(new int[] { array[1], array[2], (int)Direction.E });
+            }
+        //check SE[1,1]
+        array = succesfulMoveInDiraction(boardSquareCoordinates, 1, 1, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+            {
+                validMovesList.Add(new int[] { array[1], array[2], (int)Direction.SE });
+            }
+
+        //check S[1,0]
+        array = succesfulMoveInDiraction(boardSquareCoordinates, 1, 0, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+            {
+                validMovesList.Add(new int[] { array[1], array[2], (int)Direction.SE });
+            }
+
+        //check SW[-1,1]
+        array = succesfulMoveInDiraction(boardSquareCoordinates, -1, 1, currentPlayer);
+        if (array[0] == 1)//encountered empty place
+            {
+                validMovesList.Add(new int[] { array[1], array[2], (int)Direction.SW });
+            }
+        
+    //check W[0,-1]
+        array = succesfulMoveInDiraction(boardSquareCoordinates, 0, -1, currentPlayer);
+            if (array[0] == 1)//encountered empty place
+            {
+                validMovesList.Add(new int[] { array[1], array[2], (int) Direction.W });
+            }
+        
+        Debug.Log("Valids:");
+        Debug.Log(validMovesList.Count);
+        return validMovesList;
+    }
+    public int[] succesfulMoveInDiraction(int[] boardSquareCoordinates, int x, int y, PlayerEnum currentPlayer)
+    {
+        int hasEnemies = 0;
+        bool reachedNullOrAlly = false;
+        int[] tempCoords = (int[])boardSquareCoordinates.Clone();
+
+        while (reachedNullOrAlly != true)
+        {
+            tempCoords[0] += x;
+            tempCoords[1] += y;
+
+            if (inRange(tempCoords[0]) && inRange(tempCoords[1]))
+            {
+                if (board[tempCoords[0], tempCoords[1]].belongsToPlayer != PlayerEnum.none &&
+                     board[tempCoords[0], tempCoords[1]].belongsToPlayer != currentPlayer)
+                    reachedNullOrAlly = true;
+            }
+            else hasEnemies = 1;
+        }
+
+        return new int[] { hasEnemies, tempCoords[0], tempCoords[1] };
+    }
+
+    public bool inRange(int value)
+    {
+        return value < boardLength && value >= 0;
+    }
+
 
     public int updateBeatPieces(List<int[]> validMoves, IPlayer currentPlayer)
     {
@@ -420,6 +527,17 @@ public class Board
             boardUpdateEvent();
         Debug.Log("ChangedPieces: " + changedPieces);
         return changedPieces;
+    }
+
+    public void changePieces(int[] coords, int x, int y, PlayerEnum colorOrig, PlayerEnum colorToChange, ref int changed)
+    {
+        while (board[coords[1] - x, coords[0] + y].belongsToPlayer == colorOrig)//while next is enemy (must be since we checked)
+        {
+            board[coords[1] - x, coords[0] + y].belongsToPlayer = colorToChange;
+            changed++;
+            coords[0] += y;
+            coords[1] += x;
+        }
     }
 }
 

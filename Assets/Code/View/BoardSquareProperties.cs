@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class BoardSquareProperties : MonoBehaviour
 {
-    public Transform PieceOWhite;
-    public Transform PieceOBlack;
+    public GameObject PieceOWhite;
+    public GameObject PieceOBlack;
     //public Game game;
     public int xPos = 0;
     public int yPos = 0;

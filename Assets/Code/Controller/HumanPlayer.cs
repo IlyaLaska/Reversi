@@ -10,4 +10,5 @@ public class HumanPlayer : IPlayer
     public int score { get; set; }
     public PlayerEnum color { get; set; }
     public int[] currentTurnCoords { get; set; }
+    public int[] getMove() { return this.currentTurnCoords; }
 }

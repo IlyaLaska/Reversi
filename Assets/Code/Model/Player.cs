@@ -12,8 +12,8 @@ public class Player : IPlayer
         this.isWhite = isWhite;
     }
 
-    //int[] IPlayer.getMove(int[][] validMoves)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    int[] IPlayer.getMove()
+    {
+        throw new NotImplementedException();
+    }
 }
