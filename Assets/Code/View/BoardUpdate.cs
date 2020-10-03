@@ -38,11 +38,11 @@ public class BoardUpdate : MonoBehaviour
         {
             for (int x = 0; x < 8; x++)
             {
-                Debug.Log("SQUARES");
-                Debug.Log(squares[0,0]);
+                //Debug.Log("SQUARES");
+                //Debug.Log(squares[0,0]);
                 BoardSquareProperties curProps = squares[x, y].GetComponent<BoardSquareProperties>();
-                Debug.Log("CUR Props");
-                Debug.Log(curProps);
+                //Debug.Log("CUR Props");
+                //Debug.Log(curProps);
                 if (board.board[x,y].belongsToPlayer != curProps.pieceColor)
                 {
                     //Update Piece - Create New

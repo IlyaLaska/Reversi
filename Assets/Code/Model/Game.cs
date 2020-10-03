@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
+using Debug = UnityEngine.Debug;
+
 
 public class Game
 {
@@ -50,6 +53,7 @@ public class Game
     {
         //get valid moves list
         this.validMovesAndDirsForThisTurn = gameBoard.getValidMovesList(currentPlayer);
+        //Debug.Log(validMovesAndDirsForThisTurn.Length);
         if (this.validMovesAndDirsForThisTurn.Length < 1)
         {
             if (isMaxScore())
@@ -60,8 +64,8 @@ public class Game
             // GAME IS OVER EVENT
 
             // game is not over, no available turns
-            //changeTurn();
-            updateValidMovesList();
+            changePlayer();
+            updateValidMovesList();//UNCOMMent
             //playRound();
         }
     }

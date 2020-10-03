@@ -42,8 +42,8 @@ public class Board
 
     public int[][] getValidMovesList(IPlayer currPlayer)
     {
-        Debug.Log("WWWWW");
-        Debug.Log(currPlayer.color);
+        //Debug.Log("WWWWW");
+        //Debug.Log(currPlayer.color);
         PlayerEnum currentPlayer = currPlayer.color;
         
         HashSet<int[]> validMovesList = new HashSet<int[]>();
@@ -51,20 +51,26 @@ public class Board
         {
             for (int j = 0; j < boardLength; j++)
             {
-                Debug.Log(board[i, j].belongsToPlayer);
+                //Debug.Log(board[i, j].belongsToPlayer);
                 if (board[i,j].belongsToPlayer == currentPlayer)//have to check possible moves for that piece
                 {
-                    validMovesList.Concat(getValidMovesForAPiece(new int[] {i, j}, currentPlayer));
+                    //HashSet<int[]> a = getValidMovesForAPiece(new int[] { i, j }, currentPlayer);
+                    validMovesList = new HashSet<int[]> (validMovesList.Concat(getValidMovesForAPiece(new int[] { i, j }, currentPlayer)));
                 }
             }
         }
         if(getValidMovesListEvent != null)
             getValidMovesListEvent();
 
+        Debug.Log("WWWWW");
+        Debug.Log(validMovesList.Count);
         return validMovesList.ToArray();
     }
     private HashSet<int[]> getValidMovesForAPiece(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
     {
+        Debug.Log("Input: ");
+        Debug.Log("X: " + boardSquareCoordinates[0] + "Y: " + boardSquareCoordinates[1]);
+
         HashSet<int[]> validMovesList = new HashSet<int[]>();
         int[] tempCoord;
         //check NW
@@ -187,7 +193,8 @@ public class Board
                 validMovesList.Add(new int[] { tempCoord[0], tempCoord[1], (int)Direction.W});
             }
         }
-            
+        Debug.Log("Valids:");
+        Debug.Log(validMovesList.Count);
         return validMovesList;
     }
 
