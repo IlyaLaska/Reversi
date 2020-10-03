@@ -7,7 +7,12 @@ public class Board
 	public int boardLength = 8;
     public BoardSquare[,] board;
 
-	public Board()
+    public delegate void GetValidMovesListEvent();
+    public static event GetValidMovesListEvent getValidMovesListEvent;
+    public delegate void BoardUpdateEvent();
+    public static event BoardUpdateEvent boardUpdateEvent;
+
+    public Board()
 	{
 		this.board = new BoardSquare[boardLength, boardLength];
         initBoard();
@@ -29,6 +34,8 @@ public class Board
 
         this.board[3, 4].belongsToPlayer = PlayerEnum.black;
         this.board[4, 3].belongsToPlayer = PlayerEnum.black;
+
+        boardUpdateEvent();
     }
     public int[][] getValidMovesList(PlayerEnum currentPlayer)
     {
@@ -43,6 +50,7 @@ public class Board
                 }
             }
         }
+        getValidMovesListEvent();
         return validMovesList.ToArray();
     }
     private HashSet<int[]> getValidMovesForAPiece(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
@@ -362,6 +370,7 @@ public class Board
                 }
             }
         }
+        boardUpdateEvent();
         return changedPieces;
     }
 }

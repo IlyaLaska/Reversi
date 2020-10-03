@@ -29,7 +29,10 @@ public class Game
         if(this.validMovesForThisTurn.Length < 1)
         {
             if (isMaxScore())
+            {
                 gameEnded();
+                return;
+            }
                 // GAME IS OVER EVENT
 
                 // game is not over, no available turns

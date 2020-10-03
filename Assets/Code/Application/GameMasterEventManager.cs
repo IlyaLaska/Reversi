@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test2 : MonoBehaviour
+public class GameMasterEventManager : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +16,4 @@ public class test2 : MonoBehaviour
     {
         
     }
-
-    private void OnMouseDown()
-    {
-    }
-
 }

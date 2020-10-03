@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8231833303935377562}
   - component: {fileID: 6048977699349627317}
   - component: {fileID: -5033222251771314243}
-  - component: {fileID: 3343839976156411623}
   - component: {fileID: 1109440990957697645}
   m_Layer: 0
   m_Name: BoardSquare
@@ -97,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e5ca77bf278e54b8eff617583ae9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PieceO: {fileID: 4221245728845398011, guid: 03ad766ab4ce9b6498cceb248174e4a7, type: 3}
 --- !u!61 &-5033222251771314243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,18 +122,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3343839976156411623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3989246688302274085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec6a96358b0387479d6ba6130632353, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1109440990957697645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3de0f262e97de46b4e830396bb2a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PieceO: {fileID: 4221245728845398011, guid: 03ad766ab4ce9b6498cceb248174e4a7, type: 3}
+  xPos: 7
+  yPos: 7
