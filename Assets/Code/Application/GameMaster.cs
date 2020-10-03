@@ -17,7 +17,7 @@ public class GameMaster : MonoBehaviour
     {
         playerWhite = new HumanPlayer(PlayerEnum.white);
         playerBlack = new HumanPlayer(PlayerEnum.black);
-        gameO = new Game(playerWhite, playerBlack);
+        gameO = new Game(playerBlack, playerWhite);
         boardUpdateO = GameObject.FindObjectOfType<BoardUpdate>();
         boardUpdateO.setBoard(gameO.gameBoard);
         //boardUpdateO.instantiateBoard();

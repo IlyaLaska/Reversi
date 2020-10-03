@@ -51,6 +51,7 @@ public class Game
     }
     public void updateValidMovesList()
     {
+        Debug.Log("IN updateValidMovesList. currPlayer: " + currentPlayer.color);
         //get valid moves list
         this.validMovesAndDirsForThisTurn = gameBoard.getValidMovesList(currentPlayer);
         //Debug.Log(validMovesAndDirsForThisTurn.Length);
@@ -65,7 +66,7 @@ public class Game
 
             // game is not over, no available turns
             changePlayer();
-            updateValidMovesList();//UNCOMMent
+            //updateValidMovesList();//UNCOMMent
             //playRound();
         }
     }
