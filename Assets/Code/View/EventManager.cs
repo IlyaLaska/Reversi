@@ -7,12 +7,13 @@ public class EventManager : MonoBehaviour
 {
     public delegate void MouseDownEvent();
     public static event MouseDownEvent BoardSquareClicked;
+    public BoardSquareProperties boardOProps;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        boardOProps = gameObject.GetComponent<BoardSquareProperties>();
     }
 
     // Update is called once per frame
@@ -23,7 +24,8 @@ public class EventManager : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Called MouseDownEvent");
+        //.xPos
+        Debug.Log("Called MouseDownEvent: X = " + boardOProps.xPos + ", Y = " + boardOProps.yPos);
         if (BoardSquareClicked != null)
             BoardSquareClicked();
     }
