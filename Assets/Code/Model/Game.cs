@@ -100,6 +100,7 @@ public class Game
     {
         //int[] selectedSquare = currentPlayer.getMove(this.validMovesAndDirsForThisTurn);
 
+        //int[] selectedSquare = currentPlayer.getMove();
         int[] selectedSquare = currentPlayer.currentTurnCoords;
         //Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAASEL Sq: " + selectedSquare[0] + " , " + selectedSquare[1]);
         List<int[]> takenCoordsAndDirections = new List<int[]>();
