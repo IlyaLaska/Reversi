@@ -2,7 +2,7 @@
 
 public class BoardSquare
 {
-    public bool toChange = false;
+    //public bool toChange = false;
     //public bool occupied = false;
-    public PlayerEnum belongsToPlayer = null;
+    public PlayerEnum belongsToPlayer = PlayerEnum.none;
 }
