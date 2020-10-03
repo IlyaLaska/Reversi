@@ -10,22 +10,21 @@ public class BoardUpdate : MonoBehaviour
     public Board board;
     void Start()
     {
-        squares = new GameObject[8,8];
-        boardOProps = boardO.GetComponent<BoardSquareProperties>();
-        instantiateBoard();
+        
 
     }
     private void Awake()
     {
-        
+        squares = new GameObject[8, 8];
+        boardOProps = boardO.GetComponent<BoardSquareProperties>();
+        instantiateBoard();
     }
     // Update is called once per frame
     void Update()
     {
 
     }
-    private void OnEnable()
-    {
+    private void OnEnable()    {
         Board.boardUpdateEvent += boardUpdateHandler;
     }
     private void OnDisable()
@@ -39,8 +38,11 @@ public class BoardUpdate : MonoBehaviour
         {
             for (int x = 0; x < 8; x++)
             {
+                Debug.Log("SQUARES");
+                Debug.Log(squares[0,0]);
                 BoardSquareProperties curProps = squares[x, y].GetComponent<BoardSquareProperties>();
-                //Debug.Log(curProps);
+                Debug.Log("CUR Props");
+                Debug.Log(curProps);
                 if (board.board[x,y].belongsToPlayer != curProps.pieceColor)
                 {
                     //Update Piece - Create New
@@ -67,7 +69,7 @@ public class BoardUpdate : MonoBehaviour
         }
     }
 
-    void instantiateBoard()
+    public void instantiateBoard()
     {
         int xPosition = 0, yPosition = 0;
         //Instantiate(boardO, new Vector2(-3.5f, 3.5f), boardO.rotation);

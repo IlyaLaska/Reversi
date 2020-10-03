@@ -4,6 +4,7 @@ public class CPUPlayer : IPlayer
 {
     public int score { get; set; }
     public PlayerEnum color { get; set; }
+    public int[] currentTurnCoords { get; set; }
 
     public int[] getMove(int[][] validMoves)
     {

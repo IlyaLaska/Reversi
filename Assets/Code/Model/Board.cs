@@ -39,20 +39,28 @@ public class Board
         boardUpdateEvent();
         Debug.Log("Called boardUpdateEvent");
     }
-    public int[][] getValidMovesList(PlayerEnum currentPlayer)
+
+    public int[][] getValidMovesList(IPlayer currPlayer)
     {
+        Debug.Log("WWWWW");
+        Debug.Log(currPlayer.color);
+        PlayerEnum currentPlayer = currPlayer.color;
+        
         HashSet<int[]> validMovesList = new HashSet<int[]>();
         for (int i = 0; i < boardLength; i++)
         {
             for (int j = 0; j < boardLength; j++)
             {
+                Debug.Log(board[i, j].belongsToPlayer);
                 if (board[i,j].belongsToPlayer == currentPlayer)//have to check possible moves for that piece
                 {
                     validMovesList.Concat(getValidMovesForAPiece(new int[] {i, j}, currentPlayer));
                 }
             }
         }
-        getValidMovesListEvent();
+        if(getValidMovesListEvent != null)
+            getValidMovesListEvent();
+
         return validMovesList.ToArray();
     }
     private HashSet<int[]> getValidMovesForAPiece(int[] boardSquareCoordinates, PlayerEnum currentPlayer)
@@ -183,8 +191,10 @@ public class Board
         return validMovesList;
     }
 
-    public int updateBeatPieces(List<int[]> validMoves, PlayerEnum currentTurn)
+    public int updateBeatPieces(List<int[]> validMoves, IPlayer currentPlayer)
     {
+
+        PlayerEnum currentTurn = currentPlayer.color;
         int changedPieces = 0;
         //int[] tempCoords = { 0, 0 };
         foreach (var move in validMoves)
@@ -372,7 +382,8 @@ public class Board
                 }
             }
         }
-        boardUpdateEvent();
+        if(boardUpdateEvent != null)
+            boardUpdateEvent();
         return changedPieces;
     }
 }

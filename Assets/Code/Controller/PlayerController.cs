@@ -31,9 +31,7 @@ public class PlayerController : MonoBehaviour
     public void boardSquareClickHandler(int xPos, int yPos)
     {
         //SEND TO MODEL
-        //if (gameMaster.gameO.validMovesAndDirsForThisTurn.Length == 0)
-        //{
-
-        //}
+        gameMaster.gameO.currentPlayer.currentTurnCoords = new int[] { xPos, yPos };
+        gameMaster.gameO.playRound();
     }
 }

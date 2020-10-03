@@ -130,9 +130,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888075621}
+  - component: {fileID: 1888075624}
   - component: {fileID: 1888075622}
   - component: {fileID: 1888075623}
-  - component: {fileID: 1888075624}
   - component: {fileID: 1888075625}
   m_Layer: 0
   m_Name: GameMaster
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df186bb8b3fb8544d828ab3fa905c608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMaster: {fileID: 0}
 --- !u!1 &1969694209
 GameObject:
   m_ObjectHideFlags: 0
