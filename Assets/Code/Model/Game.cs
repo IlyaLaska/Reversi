@@ -51,7 +51,7 @@ public class Game
     }
     public void updateValidMovesList()//uncomment
     {
-        Debug.Log("IN updateValidMovesList. currPlayer: " + currentPlayer.color);
+        //Debug.Log("IN updateValidMovesList. currPlayer: " + currentPlayer.color);
         //get valid moves list
         this.validMovesAndDirsForThisTurn = gameBoard.getValidMovesList(currentPlayer);
         //Debug.Log(validMovesAndDirsForThisTurn.Length);

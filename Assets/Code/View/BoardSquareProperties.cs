@@ -22,6 +22,7 @@ public class BoardSquareProperties : MonoBehaviour
     void Start()
     {
         gameMaster = GameObject.FindObjectOfType<GameMaster>();
+        pieceO = null;
     }
 
     // Update is called once per frame

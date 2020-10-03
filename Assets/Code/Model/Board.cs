@@ -224,29 +224,29 @@ public class Board
 
     public int updateBeatPieces(List<int[]> validMoves, IPlayer currentPlayer)
     {
-
         PlayerEnum currentTurn = currentPlayer.color;
+        this.board[validMoves[0][1], validMoves[0][0]].belongsToPlayer = currentTurn;
         int changedPieces = 0;
         //int[] tempCoords = { 0, 0 };
         foreach (var move in validMoves)
         {
-            Debug.Log("WWWWWWWWWWW: " + move[0] + " , " + move[0] + " , " + move[0] + " , ");
+            Debug.Log("MADE MOVE: " + move[0] + " , " + move[1] + " , " + (Direction) move[2] + " , ");
             if(move[2] == (int) Direction.NW)//move in opposite direction and count flipped Pieces on the way
             {
                 if(currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0] + 1, move[1] + 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1] + 1, move[0] + 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] + 1].belongsToPlayer = PlayerEnum.black;
+                        board[move[1] + 1, move[0] + 1].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
                         move[0]++;
                         move[1]++;
                     }
                 } else if(currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0] + 1, move[1] + 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1] + 1, move[0] + 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] + 1].belongsToPlayer = PlayerEnum.white;
+                        board[move[1] + 1, move[0] + 1].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
                         move[0]++;
                         move[1]++;
@@ -256,21 +256,21 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0], move[1] + 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1] + 1, move[0]].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0], move[1] + 1].belongsToPlayer = PlayerEnum.black;
+                        board[move[1] + 1, move[0]].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
-                        move[0]++;
+                        //move[0]++;
                         move[1]++;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0], move[1] + 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1] + 1, move[0]].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0], move[1] + 1].belongsToPlayer = PlayerEnum.white;
+                        board[move[1] + 1, move[0]].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
-                        move[0]++;
+                        //move[0]++;
                         move[1]++;
                     }
                 }
@@ -279,21 +279,21 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0] + 1, move[1] - 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1] + 1, move[0]-1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] - 1].belongsToPlayer = PlayerEnum.black;
+                        board[move[1] + 1, move[0]-1].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
-                        move[0]++;
+                        move[0]--;
                         move[1]++;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0] + 1, move[1] - 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1] + 1, move[0]-1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] - 1].belongsToPlayer = PlayerEnum.white;
+                        board[move[1] + 1, move[0]-1].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
-                        move[0]++;
+                        move[0]--;
                         move[1]++;
                     }
                 }
@@ -302,22 +302,22 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0] - 1, move[1]].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1], move[0]-1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] - 1, move[1]].belongsToPlayer = PlayerEnum.black;
+                        board[move[1], move[0]-1].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
-                        move[0]++;
-                        move[1]++;
+                        move[0]--;
+                        //move[1]++;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0] - 1, move[1]].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1], move[0]-1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] - 1, move[1]].belongsToPlayer = PlayerEnum.white;
+                        board[move[1], move[0]-1].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
-                        move[0]++;
-                        move[1]++;
+                        move[0]--;
+                        //move[1]++;
                     }
                 }
             }
@@ -325,22 +325,22 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0] - 1, move[1] - 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1] - 1, move[0]-1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] - 1, move[1] - 1].belongsToPlayer = PlayerEnum.black;
+                        board[move[1] - 1, move[0]-1].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
-                        move[0]++;
-                        move[1]++;
+                        move[0]--;
+                        move[1]--;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0] - 1, move[1] - 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1] - 1, move[0]-1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] + 1].belongsToPlayer = PlayerEnum.white;
+                        board[move[1] - 1, move[0]-1].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
-                        move[0]++;
-                        move[1]++;
+                        move[0]--;
+                        move[1]--;
                     }
                 }
             }
@@ -348,22 +348,22 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0], move[1] - 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1] - 1, move[0]].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0], move[1] - 1].belongsToPlayer = PlayerEnum.black;
+                        board[move[1] - 1, move[0]].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
-                        move[0]++;
-                        move[1]++;
+                        //move[0]++;
+                        move[1]--;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0], move[1] - 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1] - 1, move[0]].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0], move[1] - 1].belongsToPlayer = PlayerEnum.white;
+                        board[move[1] - 1, move[0]].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
-                        move[0]++;
-                        move[1]++;
+                        //move[0]++;
+                        move[1]--;
                     }
                 }
             }
@@ -371,22 +371,22 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0] + 1, move[1] - 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1] - 1, move[0] + 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] - 1].belongsToPlayer = PlayerEnum.black;
+                        board[move[1] - 1, move[0] + 1].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
                         move[0]++;
-                        move[1]++;
+                        move[1]--;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0] + 1, move[1] - 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    while (board[move[1] - 1, move[0] + 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1] - 1].belongsToPlayer = PlayerEnum.white;
+                        board[move[1] - 1, move[0] + 1].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
                         move[0]++;
-                        move[1]++;
+                        move[1]--;
                     }
                 }
             }
@@ -394,28 +394,31 @@ public class Board
             {
                 if (currentTurn == PlayerEnum.black)
                 {
-                    while (board[move[0] + 1, move[1]].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
+                    while (board[move[1], move[0] + 1].belongsToPlayer == PlayerEnum.white)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1]].belongsToPlayer = PlayerEnum.black;
+                        //Debug.Log("Changing: X: " + (move[0] + 1) + " Y: " + move[1]);
+                        board[move[1], move[0] + 1].belongsToPlayer = PlayerEnum.black;
                         changedPieces++;
                         move[0]++;
-                        move[1]++;
+                        //move[1]++;
                     }
                 }
                 else if (currentTurn == PlayerEnum.white)
                 {
-                    while (board[move[0] + 1, move[1]].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
+                    //Debug.Log("Board " + (move[0] + 1) + " , " + move[1] + ": " + board[move[1], move[0] + 1].belongsToPlayer);
+                    while (board[move[1], move[0] + 1].belongsToPlayer == PlayerEnum.black)//while next is enemy (must be since we checked)
                     {
-                        board[move[0] + 1, move[1]].belongsToPlayer = PlayerEnum.white;
+                        board[move[1], move[0] + 1].belongsToPlayer = PlayerEnum.white;
                         changedPieces++;
                         move[0]++;
-                        move[1]++;
+                        //move[1]++;
                     }
                 }
             }
         }
         if(boardUpdateEvent != null)
             boardUpdateEvent();
+        Debug.Log("ChangedPieces: " + changedPieces);
         return changedPieces;
     }
 }

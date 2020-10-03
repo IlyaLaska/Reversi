@@ -40,32 +40,46 @@ public class BoardUpdate : MonoBehaviour
             {
                 //Debug.Log("SQUARES");
                 //Debug.Log(squares[0,0]);
-                BoardSquareProperties curProps = squares[x, y].GetComponent<BoardSquareProperties>();
+                BoardSquareProperties curProps = squares[y, x].GetComponent<BoardSquareProperties>();
                 //Debug.Log("CUR Props");
                 //Debug.Log(curProps);
-                if (board.board[x,y].belongsToPlayer != curProps.pieceColor)
+                if (board.board[y,x].belongsToPlayer != curProps.pieceColor)
                 {
-                    //Update Piece - Create New
-                    if (board.board[x,y].belongsToPlayer == PlayerEnum.white)
+                    Debug.Log("------------------X " + x + " and Y "+ y);
+                    Debug.Log("--PieceO: " + (curProps.pieceO == null));
+                    Debug.Log("--PieceColor: " + curProps.pieceColor);
+                    if (curProps.pieceO != null)
                     {
-                        Instantiate(curProps.PieceOWhite, curProps.transform.position, curProps.PieceOWhite.rotation);
-                    }
-                    else if (board.board[x,y].belongsToPlayer == PlayerEnum.black)
-                    {
-                        Instantiate(curProps.PieceOBlack, curProps.transform.position, curProps.PieceOBlack.rotation); ;
+                        Debug.Log("+++++++PieceO Name: " + curProps.pieceO.name);
                     }
                     //Update Piece - Destroy old
-                    if (curProps.pieceColor == PlayerEnum.white)
+                    if (curProps.pieceColor == PlayerEnum.white && curProps.pieceO)
                     {
-                        //curProps.PieceOWhite.gameObject.SetActive(false);
-                        Destroy(curProps.PieceOWhite.gameObject);
-                    } else if (curProps.pieceColor == PlayerEnum.black)
-                    {
-                        //curProps.PieceOBlack.gameObject.SetActive(false);
-                        Destroy(curProps.PieceOBlack.gameObject);
+                        curProps.pieceO.transform.position = new Vector2(-100, -100);
+                        Debug.Log("------------------DELETE Black");
+                        //Destroy(curProps.pieceO);
                     }
+                    else if (curProps.pieceColor == PlayerEnum.black && curProps.pieceO)
+                    {
+                        curProps.pieceO.transform.position = new Vector2(-100, -100);
+                        Debug.Log("------------------DELETE Black");
+                        //Destroy(curProps.pieceO);
+                    }
+
+                    //Update Piece - Create New
+                    if (board.board[y,x].belongsToPlayer == PlayerEnum.white)
+                    {
+                        curProps.pieceO = (GameObject) Instantiate(curProps.PieceOWhite.gameObject, curProps.transform.position, curProps.PieceOWhite.rotation);
+                        Debug.Log("------------------Create New WHITE \n" + curProps.pieceO.name);
+                    }
+                    else if (board.board[y,x].belongsToPlayer == PlayerEnum.black)
+                    {
+                        curProps.pieceO = (GameObject) Instantiate(curProps.PieceOBlack.gameObject, curProps.transform.position, curProps.PieceOBlack.rotation);
+                        Debug.Log(" ------------------Create New BLACK \n" + curProps.pieceO.name);
+                    }
+
                     //change to correct value
-                    curProps.pieceColor = board.board[x, y].belongsToPlayer;
+                    curProps.pieceColor = board.board[y,x].belongsToPlayer;
                 }
             }
         }
