@@ -14,6 +14,7 @@ public class Game
     public int moveCounter = 0;
     public bool gameIsOver = false;
     public IPlayer currentPlayer;
+    bool playerSkippedMove = false;
 
     public delegate void GetValidMovesListEvent();
     public static event GetValidMovesListEvent getValidMovesListEvent;
@@ -56,7 +57,11 @@ public class Game
         //get valid moves list
         this.validMovesAndDirsForThisTurn = gameBoard.getValidMovesList(currentPlayer);
         if (getValidMovesListEvent != null)
+        {
+            Debug.Log("+++++++++++++++++getValidMovesListEvent");
             getValidMovesListEvent();
+        }
+
         //Debug.Log(validMovesAndDirsForThisTurn.Length);
         if (this.validMovesAndDirsForThisTurn.Length < 1)
         {
@@ -65,10 +70,18 @@ public class Game
                 gameEnded();
                 return;
             }
-            // GAME IS OVER EVENT
-
-            // game is not over, no available turns
-            changePlayer();
+            // game might be over, no available turns
+            if(!playerSkippedMove)//first time a player skips
+            {
+                playerSkippedMove = true;
+                changePlayer();
+                updateValidMovesList();
+            } else
+            {
+                gameEnded();
+                return;
+            }
+            playerSkippedMove = false;
             //updateValidMovesList();//UNCOMMent
             //playRound();
         }

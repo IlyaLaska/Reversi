@@ -14,8 +14,6 @@ public class BoardUpdate : MonoBehaviour
 
     void Start()
     {
-        game = GameObject.FindObjectOfType<GameMaster>().gameO;
-
     }
     private void Awake()
     {
@@ -46,9 +44,13 @@ public class BoardUpdate : MonoBehaviour
     {
         foreach (var XYDirection in game.validMovesAndDirsForThisTurn)
         {
-            Debug.Log("X and Y: " + XYDirection[0] + " , " + XYDirection[1]);
+            
             boardOProps = squares[XYDirection[1], XYDirection[0]].GetComponent<BoardSquareProperties>();
-            highlights[XYDirection[1], XYDirection[0]] = (GameObject)Instantiate(boardOProps.Highlight, boardOProps.transform.position, boardOProps.PieceOWhite.transform.rotation);
+            if(!highlights[XYDirection[1], XYDirection[0]])
+            {
+                Debug.Log("VALID MOVE X and Y: " + XYDirection[0] + " , " + XYDirection[1]);
+                highlights[XYDirection[1], XYDirection[0]] = (GameObject)Instantiate(boardOProps.Highlight, boardOProps.transform.position, boardOProps.PieceOWhite.transform.rotation);
+            }              
         }
     }
 
@@ -66,22 +68,27 @@ public class BoardUpdate : MonoBehaviour
                 //Debug.Log(boardOProps);
 
                 // clear highlights
-                if (highlights[y, x]) Destroy(highlights[y, x]);
+                if (highlights[y, x])
+                {
+                    Debug.Log("----------------------------------REMOVE highlight at X and Y: " + x + ", " + y);
+                    DestroyImmediate(highlights[y, x], true);
+                }
+
 
                 if (board.board[y, x].belongsToPlayer != boardOProps.pieceColor)
                 {
-                    Debug.Log("------------------X " + x + " and Y " + y);
-                    Debug.Log("--PieceColor: " + boardOProps.pieceColor);
+                    //Debug.Log("------------------X " + x + " and Y " + y);
+                    //Debug.Log("--PieceColor: " + boardOProps.pieceColor);
 
                     //Update Piece - Destroy old
                     if (boardOProps.pieceColor == PlayerEnum.white && pieces[y, x])
                     {
-                        Debug.Log("------------------DELETE Black");
+                        //Debug.Log("------------------DELETE Black");
                         Destroy(pieces[y, x]);
                     }
                     else if (boardOProps.pieceColor == PlayerEnum.black && pieces[y, x])
                     {
-                        Debug.Log("------------------DELETE Black");
+                        //Debug.Log("------------------DELETE Black");
                         Destroy(pieces[y, x]);
                     }
 
@@ -89,12 +96,12 @@ public class BoardUpdate : MonoBehaviour
                     if (board.board[y, x].belongsToPlayer == PlayerEnum.white)
                     {
                         pieces[y, x] = (GameObject)Instantiate(boardOProps.PieceOWhite, boardOProps.transform.position, boardOProps.PieceOWhite.transform.rotation);
-                        Debug.Log("------------------Create New WHITE \n" + pieces[y, x]);
+                        //Debug.Log("------------------Create New WHITE \n" + pieces[y, x]);
                     }
                     else if (board.board[y, x].belongsToPlayer == PlayerEnum.black)
                     {
                         pieces[y, x] = (GameObject)Instantiate(boardOProps.PieceOBlack, boardOProps.transform.position, boardOProps.PieceOBlack.transform.rotation);
-                        Debug.Log(" ------------------Create New BLACK \n" + pieces[y, x]);
+                        //Debug.Log(" ------------------Create New BLACK \n" + pieces[y, x]);
                     }
 
                     //change to correct value

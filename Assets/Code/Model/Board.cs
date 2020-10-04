@@ -73,10 +73,10 @@ public class Board
         //Debug.Log("X: " + boardSquareCoordinates[0] + "Y: " + boardSquareCoordinates[1]);
 
         HashSet<int[]> validMovesList = new HashSet<int[]>();
-        int[] tempCoord;
+        //int[] tempCoord;
 
         //check NW
-        //Debug.Log("Checking NW");
+        Debug.Log("Checking NW");
 
         // NW [-1,-1]
         int[] array;
@@ -84,69 +84,69 @@ public class Board
         array = succesfulMoveInDiraction(boardSquareCoordinates, -1, -1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], -1, -1 });
         }
 
         //check N [-1, 0]
-        //Debug.Log("Checking N");
+        Debug.Log("Checking N");
         array = succesfulMoveInDiraction(boardSquareCoordinates, -1, 0, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], -1, 0 });
         }
         //check NE [+1,-1]
-        //Debug.Log("Checking NE");
+        Debug.Log("Checking NE");
 
         array = succesfulMoveInDiraction(boardSquareCoordinates, 1, -1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 1, -1 });
         }
 
         //check E[0,1]
-        //Debug.Log("Checking E");
+        Debug.Log("Checking E");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 0, 1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 0, 1 });
         }
         //check SE[1,1]
-        //Debug.Log("Checking SE");
+        Debug.Log("Checking SE");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 1, 1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 1, 1 });
         }
 
         //check S[1,0]
-        //Debug.Log("Checking S");
+        Debug.Log("Checking S");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 1, 0, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 1, 0 });
         }
 
         //check SW[-1,1]
-        //Debug.Log("Checking SW");
+        Debug.Log("Checking SW");
         array = succesfulMoveInDiraction(boardSquareCoordinates, -1, 1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], -1, 1 });
         }
 
         //check W[0,-1]
-        //Debug.Log("Checking W");
+        Debug.Log("Checking W");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 0, -1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 0, -1 });
         }
 
@@ -172,7 +172,7 @@ public class Board
                 if (board[tempCoords[1], tempCoords[0]].belongsToPlayer == PlayerEnum.none ||
                      board[tempCoords[1], tempCoords[0]].belongsToPlayer == currentPlayer)
                 {
-                    if(hasEnemies == 1 && board[tempCoords[1], tempCoords[0]].belongsToPlayer == currentPlayer)
+                    if (hasEnemies == 1 && board[tempCoords[1], tempCoords[0]].belongsToPlayer == currentPlayer)
                     {
                         hasEnemies = 0;
                     }
@@ -188,6 +188,7 @@ public class Board
             }
             else
             {
+                hasEnemies = 0;
                 //Debug.Log("reachedNullOrAlly +++ out of bond");
                 reachedNullOrAlly = true;
             }

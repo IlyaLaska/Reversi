@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public void nextMoveHandler()
     {
-        if(!gameMaster.gameO.currentPlayer.isHuman)
+        if (!gameMaster.gameO.currentPlayer.isHuman)
         {
             CPUPlayer bot = gameMaster.gameO.currentPlayer as CPUPlayer;
             bot.currentTurnCoords = bot.getMove(gameMaster.gameO.validMovesAndDirsForThisTurn);
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public void boardSquareClickHandler(int xPos, int yPos)
     {
         //SEND TO MODEL
+        //Debug.Log("GameMaster" + (gameMaster.gameO.currentPlayer == null));
         gameMaster.gameO.currentPlayer.currentTurnCoords = new int[] { xPos, yPos };
         gameMaster.gameO.playRound();
     }

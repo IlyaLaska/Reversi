@@ -20,6 +20,7 @@ public class GameMaster : MonoBehaviour
         gameO = new Game(playerBlack, playerWhite);
         boardUpdateO = GameObject.FindObjectOfType<BoardUpdate>();
         boardUpdateO.setBoard(gameO.gameBoard);
+        boardUpdateO.game = this.gameO;
         boardSquarePropertiesO = GameObject.FindObjectOfType<BoardSquareProperties>();
         gameO.initGame();
     }
@@ -38,6 +39,16 @@ public class GameMaster : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        Game.gameEnded += gameEndHandler;
+    }
+
+    private void OnDisable()
+    {
+        Game.gameEnded -= gameEndHandler;
+    }
+
     IPlayer createPlayer(PlayerEnum color, bool isHuman)
     {
         if(isHuman)
@@ -45,6 +56,12 @@ public class GameMaster : MonoBehaviour
         else return new CPUPlayer(color);
     }
 
+    public void gameEndHandler()
+    {
+        GameProperties.blackScore = playerBlack.score;
+        GameProperties.whiteScore = playerWhite.score;
+        SceneManager.LoadScene("MainMenu");
+    }
     
 }
 
