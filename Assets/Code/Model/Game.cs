@@ -22,6 +22,8 @@ public class Game
     public static event GameEndEvent gameEnded;
     public delegate void NextMoveEvent();
     public static event NextMoveEvent nextMove;
+    public delegate void ScoreUpdatedEvent();
+    public static event ScoreUpdatedEvent scoreUpdatedEvent;
 
     public Game(IPlayer first, IPlayer second)
     {
@@ -108,7 +110,7 @@ public class Game
         }
         else black.score -= beatPiecesCount;
         Debug.Log("===========New Score: B: " + black.score + " W: " + white.score);
-
+        scoreUpdatedEvent?.Invoke();
     }
 
     private List<int[]> getMoveFromPlayer()

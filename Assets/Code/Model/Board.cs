@@ -220,8 +220,8 @@ public class Board
             else changePieces(XYDirection[0], XYDirection[1], XYDirection[2], XYDirection[3], currentTurn, PlayerEnum.black, ref changedPieces);
         }
 
-        if (boardUpdateEvent != null)
-            boardUpdateEvent();
+        //if (boardUpdateEvent != null)
+            boardUpdateEvent?.Invoke();
         Debug.Log("===========ChangedPieces: " + changedPieces);
         return changedPieces;
     }

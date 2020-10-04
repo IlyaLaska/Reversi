@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BoardUpdate : MonoBehaviour
@@ -11,6 +12,8 @@ public class BoardUpdate : MonoBehaviour
     public GameObject[,] highlights;
     public Board board;
     public Game game;
+    public GameObject whiteScoreO;
+    public GameObject blackScoreO;
 
     void Start()
     {
@@ -31,13 +34,21 @@ public class BoardUpdate : MonoBehaviour
     private void OnEnable()
     {
         Board.boardUpdateEvent += boardUpdateHandler;
+        Game.scoreUpdatedEvent += scoreUpdatedHandler;
         Game.getValidMovesListEvent += getValidMovesListHandler;
 
     }
     private void OnDisable()
     {
         Board.boardUpdateEvent -= boardUpdateHandler;
+        Game.scoreUpdatedEvent -= scoreUpdatedHandler;
         Game.getValidMovesListEvent -= getValidMovesListHandler;
+    }
+
+    public void scoreUpdatedHandler()
+    {
+        whiteScoreO.GetComponent<TextMeshProUGUI>().text = game.white.score.ToString();
+        blackScoreO.GetComponent<TextMeshProUGUI>().text = game.black.score.ToString();
     }
 
     public void getValidMovesListHandler()
@@ -61,11 +72,8 @@ public class BoardUpdate : MonoBehaviour
         {
             for (int x = 0; x < 8; x++)
             {
-                //Debug.Log("SQUARES");
-                //Debug.Log(squares[0,0]);
                 boardOProps = squares[y, x].GetComponent<BoardSquareProperties>();
-                //Debug.Log("CUR Props");
-                //Debug.Log(boardOProps);
+
 
                 // clear highlights
                 if (highlights[y, x])
@@ -77,8 +85,6 @@ public class BoardUpdate : MonoBehaviour
 
                 if (board.board[y, x].belongsToPlayer != boardOProps.pieceColor)
                 {
-                    //Debug.Log("------------------X " + x + " and Y " + y);
-                    //Debug.Log("--PieceColor: " + boardOProps.pieceColor);
 
                     //Update Piece - Destroy old
                     if (boardOProps.pieceColor == PlayerEnum.white && pieces[y, x])
