@@ -7,17 +7,21 @@ public class BoardUpdate : MonoBehaviour
     public GameObject boardO;
     public BoardSquareProperties boardOProps;
     public GameObject[,] squares;
-    public GameObject[,] squaress;
+    public GameObject[,] pieces;
+    public GameObject[,] highlights;
     public Board board;
+    public Game game;
+
     void Start()
     {
-        
+        game = GameObject.FindObjectOfType<GameMaster>().gameO;
 
     }
     private void Awake()
     {
         squares = new GameObject[8, 8];
-        squaress = new GameObject[8, 8];
+        pieces = new GameObject[8, 8];
+        highlights = new GameObject[8, 8];
         boardOProps = boardO.GetComponent<BoardSquareProperties>();
         instantiateBoard();
     }
@@ -26,13 +30,28 @@ public class BoardUpdate : MonoBehaviour
     {
 
     }
-    private void OnEnable()    {
+    private void OnEnable()
+    {
         Board.boardUpdateEvent += boardUpdateHandler;
+        Game.getValidMovesListEvent += getValidMovesListHandler;
+
     }
     private void OnDisable()
     {
         Board.boardUpdateEvent -= boardUpdateHandler;
+        Game.getValidMovesListEvent -= getValidMovesListHandler;
     }
+
+    public void getValidMovesListHandler()
+    {
+        foreach (var XYDirection in game.validMovesAndDirsForThisTurn)
+        {
+            Debug.Log("X and Y: " + XYDirection[0] + " , " + XYDirection[1]);
+            boardOProps = squares[XYDirection[1], XYDirection[0]].GetComponent<BoardSquareProperties>();
+            highlights[XYDirection[1], XYDirection[0]] = (GameObject)Instantiate(boardOProps.Highlight, boardOProps.transform.position, boardOProps.PieceOWhite.transform.rotation);
+        }
+    }
+
 
     public void boardUpdateHandler()
     {
@@ -42,46 +61,44 @@ public class BoardUpdate : MonoBehaviour
             {
                 //Debug.Log("SQUARES");
                 //Debug.Log(squares[0,0]);
-                BoardSquareProperties curProps = squares[y, x].GetComponent<BoardSquareProperties>();
+                boardOProps = squares[y, x].GetComponent<BoardSquareProperties>();
                 //Debug.Log("CUR Props");
-                //Debug.Log(curProps);
-                if (board.board[y,x].belongsToPlayer != curProps.pieceColor)
+                //Debug.Log(boardOProps);
+
+                // clear highlights
+                if (highlights[y, x]) Destroy(highlights[y, x]);
+
+                if (board.board[y, x].belongsToPlayer != boardOProps.pieceColor)
                 {
-                    Debug.Log("------------------X " + x + " and Y "+ y);
-                    Debug.Log("--PieceO: " + (curProps.pieceO == null));
-                    Debug.Log("--PieceColor: " + curProps.pieceColor);
-                    //if (curProps.pieceO != null)
-                    //{
-                    //    Debug.Log("+++++++PieceO Name: " + curProps.pieceO.name);
-                    //}
+                    Debug.Log("------------------X " + x + " and Y " + y);
+                    Debug.Log("--PieceColor: " + boardOProps.pieceColor);
+
                     //Update Piece - Destroy old
-                    if (curProps.pieceColor == PlayerEnum.white && squaress[y, x])
+                    if (boardOProps.pieceColor == PlayerEnum.white && pieces[y, x])
                     {
-                        //curProps.pieceO.transform.position = new Vector2(-100, -100);
                         Debug.Log("------------------DELETE Black");
-                        Destroy(squaress[y, x]);
+                        Destroy(pieces[y, x]);
                     }
-                    else if (curProps.pieceColor == PlayerEnum.black && squaress[y, x])
+                    else if (boardOProps.pieceColor == PlayerEnum.black && pieces[y, x])
                     {
-                        //curProps.pieceO.transform.position = new Vector2(-100, -100);
                         Debug.Log("------------------DELETE Black");
-                        Destroy(squaress[y, x]);
+                        Destroy(pieces[y, x]);
                     }
 
                     //Update Piece - Create New
-                    if (board.board[y,x].belongsToPlayer == PlayerEnum.white)
+                    if (board.board[y, x].belongsToPlayer == PlayerEnum.white)
                     {
-                        squaress[y, x] = (GameObject) Instantiate(curProps.PieceOWhite, curProps.transform.position, curProps.PieceOWhite.transform.rotation);
-                        Debug.Log("------------------Create New WHITE \n" + squaress[y, x]);
+                        pieces[y, x] = (GameObject)Instantiate(boardOProps.PieceOWhite, boardOProps.transform.position, boardOProps.PieceOWhite.transform.rotation);
+                        Debug.Log("------------------Create New WHITE \n" + pieces[y, x]);
                     }
-                    else if (board.board[y,x].belongsToPlayer == PlayerEnum.black)
+                    else if (board.board[y, x].belongsToPlayer == PlayerEnum.black)
                     {
-                        squaress[y, x] = (GameObject) Instantiate(curProps.PieceOBlack, curProps.transform.position, curProps.PieceOBlack.transform.rotation);
-                        Debug.Log(" ------------------Create New BLACK \n" + squaress[y, x]);
+                        pieces[y, x] = (GameObject)Instantiate(boardOProps.PieceOBlack, boardOProps.transform.position, boardOProps.PieceOBlack.transform.rotation);
+                        Debug.Log(" ------------------Create New BLACK \n" + pieces[y, x]);
                     }
 
                     //change to correct value
-                    curProps.pieceColor = board.board[y,x].belongsToPlayer;
+                    boardOProps.pieceColor = board.board[y, x].belongsToPlayer;
                 }
             }
         }

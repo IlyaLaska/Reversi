@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6430481940138574618}
   - component: {fileID: 8231833303935377562}
-  - component: {fileID: 6048977699349627317}
   - component: {fileID: -5033222251771314243}
   - component: {fileID: 1109440990957697645}
   m_Layer: 0
@@ -84,18 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6048977699349627317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3989246688302274085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e5ca77bf278e54b8eff617583ae9f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-5033222251771314243
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,6 +124,8 @@ MonoBehaviour:
   PieceOWhite: {fileID: 7951602847584964802, guid: 03ad766ab4ce9b6498cceb248174e4a7,
     type: 3}
   PieceOBlack: {fileID: 7292959906205800731, guid: 3f8c62573c1e6c4419767577eb42d2e9,
+    type: 3}
+  Highlight: {fileID: 5098646831455967065, guid: efd67c50f8c25eb45ba50df493657e56,
     type: 3}
   xPos: 7
   yPos: 7

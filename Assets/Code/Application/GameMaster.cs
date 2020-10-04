@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -9,29 +10,41 @@ public class GameMaster : MonoBehaviour
     public Game gameO;
     public BoardUpdate boardUpdateO;
     public BoardSquareProperties boardSquarePropertiesO;
- 
-    //public EventManager eventManager;
+    bool escPressed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerWhite = new HumanPlayer(PlayerEnum.white);
-        playerBlack = new HumanPlayer(PlayerEnum.black);
+        playerBlack = createPlayer(PlayerEnum.black, GameProperties.playerBlackIsHuman);
+        playerWhite = createPlayer(PlayerEnum.white, GameProperties.playerWhiteIsHuman);
         gameO = new Game(playerBlack, playerWhite);
         boardUpdateO = GameObject.FindObjectOfType<BoardUpdate>();
         boardUpdateO.setBoard(gameO.gameBoard);
-        //boardUpdateO.instantiateBoard();
         boardSquarePropertiesO = GameObject.FindObjectOfType<BoardSquareProperties>();
-        //boardSquarePropertiesO.setGame(gameO);
-        //Debug.Log("AAAA");
-        //Debug.Log(boardSquarePropertiesO.game);
         gameO.initGame();
     }
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown("escape"))
+        {
+           if(escPressed)
+           {
+                SceneManager.LoadScene("MainMenu");
+           } else
+            {
+                escPressed = true;
+            }
+        }
     }
 
+    IPlayer createPlayer(PlayerEnum color, bool isHuman)
+    {
+        if(isHuman)
+            return new HumanPlayer(color);
+        else return new CPUPlayer(color);
+    }
+
+    
 }
 

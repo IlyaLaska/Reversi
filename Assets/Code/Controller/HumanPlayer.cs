@@ -6,9 +6,11 @@ public class HumanPlayer : IPlayer
     {
         this.color = color;
         this.score = 0;
+        this.isHuman = true;
     }
+    public bool isHuman { get; set; }
     public int score { get; set; }
     public PlayerEnum color { get; set; }
     public int[] currentTurnCoords { get; set; }
-    public int[] getMove() { return this.currentTurnCoords; }
+    public int[] getMove(int[][] possibleMoveCoords) { return this.currentTurnCoords; }
 }

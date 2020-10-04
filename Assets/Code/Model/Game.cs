@@ -7,35 +7,35 @@ using Debug = UnityEngine.Debug;
 
 public class Game
 {
-	public Board gameBoard;
-	//public PlayerEnum currentTurn;
-	public IPlayer black;
-	public IPlayer white;
-	public int[][] validMovesAndDirsForThisTurn;
-	public int moveCounter = 0;
+    public Board gameBoard;
+    public IPlayer black;
+    public IPlayer white;
+    public int[][] validMovesAndDirsForThisTurn;
+    public int moveCounter = 0;
     public bool gameIsOver = false;
     public IPlayer currentPlayer;
 
-    public delegate void GameEnd();
-    public static event GameEnd gameEnded;
-	//public int blackScore = 2;
-	//public int whiteScore = 2;
-	public Game(IPlayer first, IPlayer second)
-	{
-		black = first;
-		white = second;
+    public delegate void GetValidMovesListEvent();
+    public static event GetValidMovesListEvent getValidMovesListEvent;
+    public delegate void GameEndEvent();
+    public static event GameEndEvent gameEnded;
+    public delegate void NextMoveEvent();
+    public static event NextMoveEvent nextMove;
+
+    public Game(IPlayer first, IPlayer second)
+    {
+        black = first;
+        white = second;
         gameBoard = new Board();
-        //currentTurn = PlayerEnum.black;
         currentPlayer = black;
-        //this.playRound();
     }
 
     public void initGame()
     {
-
         gameBoard.initBoard();
         updateValidMovesList();
     }
+
     public void playRound()
     {
         //get coordinates of next move
@@ -47,13 +47,16 @@ public class Game
         changePlayer();
         updateValidMovesList();
 
-        //playRound();
+        nextMove?.Invoke();
     }
+
     public void updateValidMovesList()//uncomment
     {
         //Debug.Log("IN updateValidMovesList. currPlayer: " + currentPlayer.color);
         //get valid moves list
         this.validMovesAndDirsForThisTurn = gameBoard.getValidMovesList(currentPlayer);
+        if (getValidMovesListEvent != null)
+            getValidMovesListEvent();
         //Debug.Log(validMovesAndDirsForThisTurn.Length);
         if (this.validMovesAndDirsForThisTurn.Length < 1)
         {

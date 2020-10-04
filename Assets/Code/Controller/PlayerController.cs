@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameMaster gameMaster;
+    //public Game game;
 
     // Start is called before the first frame update
     void Start()
@@ -15,17 +16,30 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnEnable()
     {
         BoardSquareProperties.BoardSquareClicked += boardSquareClickHandler;
+        Game.nextMove += nextMoveHandler;
     }
 
     private void OnDisable()
     {
         BoardSquareProperties.BoardSquareClicked -= boardSquareClickHandler;
+        Game.nextMove -= nextMoveHandler;
+    }
+
+    public void nextMoveHandler()
+    {
+        if(!gameMaster.gameO.currentPlayer.isHuman)
+        {
+            CPUPlayer bot = gameMaster.gameO.currentPlayer as CPUPlayer;
+            bot.currentTurnCoords = bot.getMove(gameMaster.gameO.validMovesAndDirsForThisTurn);
+            gameMaster.gameO.playRound();
+        }
+
     }
 
     public void boardSquareClickHandler(int xPos, int yPos)

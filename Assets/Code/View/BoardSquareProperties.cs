@@ -7,6 +7,7 @@ public class BoardSquareProperties : MonoBehaviour
 {
     public GameObject PieceOWhite;
     public GameObject PieceOBlack;
+    public GameObject Highlight;
     //public Game game;
     public int xPos = 0;
     public int yPos = 0;
