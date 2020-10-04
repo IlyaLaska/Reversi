@@ -14,6 +14,8 @@ public class BoardUpdate : MonoBehaviour
     public Game game;
     public GameObject whiteScoreO;
     public GameObject blackScoreO;
+    public GameObject whiteTurnSignO;
+    public GameObject blackTurnSignO;
 
     void Start()
     {
@@ -49,6 +51,15 @@ public class BoardUpdate : MonoBehaviour
     {
         whiteScoreO.GetComponent<TextMeshProUGUI>().text = game.white.score.ToString();
         blackScoreO.GetComponent<TextMeshProUGUI>().text = game.black.score.ToString();
+        if(game.currentPlayer.color == PlayerEnum.white)
+        {
+            whiteTurnSignO.GetComponent<TextMeshProUGUI>().text = "";
+            blackTurnSignO.GetComponent<TextMeshProUGUI>().text = "▲";
+        } else
+        {
+            whiteTurnSignO.GetComponent<TextMeshProUGUI>().text = "▲";
+            blackTurnSignO.GetComponent<TextMeshProUGUI>().text = "";
+        }
     }
 
     public void getValidMovesListHandler()
