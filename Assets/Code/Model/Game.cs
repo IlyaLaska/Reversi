@@ -81,20 +81,15 @@ public class Game
                 gameEnded();
                 return;
             }
-            playerSkippedMove = false;
             //updateValidMovesList();//UNCOMMent
             //playRound();
         }
+        playerSkippedMove = false;
     }
     private bool isMaxScore()
     {
         return black.score + white.score == 64;
     }
-
-    //private void changeTurn()
-    //{
-    //    currentTurn = currentTurn == PlayerEnum.black ? PlayerEnum.white : PlayerEnum.black;
-    //}
 
     private void changePlayer()
     {

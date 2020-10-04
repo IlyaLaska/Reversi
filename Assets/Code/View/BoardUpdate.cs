@@ -127,7 +127,6 @@ public class BoardUpdate : MonoBehaviour
             yPosition++;
             xPosition = 0;
         }
-        Debug.Log(boardO.tag);
     }
 
     public void setBoard(Board board)

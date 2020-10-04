@@ -38,7 +38,7 @@ public class Board
         this.board[4, 3].belongsToPlayer = PlayerEnum.black;
 
         boardUpdateEvent();
-        Debug.Log("Called boardUpdateEvent");
+        //Debug.Log("Called boardUpdateEvent");
     }
 
     public int[][] getValidMovesList(IPlayer currPlayer)
@@ -60,8 +60,8 @@ public class Board
         }
 
 
-        Debug.Log("WWWWW");
-        Debug.Log(validMovesList.Count);
+        Debug.Log("Valid Moves: " + validMovesList.Count);
+        //Debug.Log(validMovesList.Count);
         return validMovesList.ToArray();
     }
 
@@ -76,7 +76,7 @@ public class Board
         //int[] tempCoord;
 
         //check NW
-        Debug.Log("Checking NW");
+        //Debug.Log("Checking NW");
 
         // NW [-1,-1]
         int[] array;
@@ -84,74 +84,74 @@ public class Board
         array = succesfulMoveInDiraction(boardSquareCoordinates, -1, -1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], -1, -1 });
         }
 
         //check N [-1, 0]
-        Debug.Log("Checking N");
+        //Debug.Log("Checking N");
         array = succesfulMoveInDiraction(boardSquareCoordinates, -1, 0, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], -1, 0 });
         }
         //check NE [+1,-1]
-        Debug.Log("Checking NE");
+        //Debug.Log("Checking NE");
 
         array = succesfulMoveInDiraction(boardSquareCoordinates, 1, -1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 1, -1 });
         }
 
         //check E[0,1]
-        Debug.Log("Checking E");
+        //Debug.Log("Checking E");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 0, 1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 0, 1 });
         }
         //check SE[1,1]
-        Debug.Log("Checking SE");
+        //Debug.Log("Checking SE");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 1, 1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 1, 1 });
         }
 
         //check S[1,0]
-        Debug.Log("Checking S");
+        //Debug.Log("Checking S");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 1, 0, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 1, 0 });
         }
 
         //check SW[-1,1]
-        Debug.Log("Checking SW");
+        //Debug.Log("Checking SW");
         array = succesfulMoveInDiraction(boardSquareCoordinates, -1, 1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], -1, 1 });
         }
 
         //check W[0,-1]
-        Debug.Log("Checking W");
+        //Debug.Log("Checking W");
         array = succesfulMoveInDiraction(boardSquareCoordinates, 0, -1, currentPlayer);
         if (array[0] == 1)//encountered empty place
         {
-            Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
+            //Debug.Log("Adding: X: " + array[1] + "Y: " + array[2]);
             validMovesList.Add(new int[] { array[1], array[2], 0, -1 });
         }
 
-        Debug.Log("Valids:");
-        Debug.Log(validMovesList.Count);
+        //Debug.Log("Valids:");
+        //Debug.Log(validMovesList.Count);
         return validMovesList;
     }
     public int[] succesfulMoveInDiraction(int[] boardSquareCoordinates, int x, int y, PlayerEnum currentPlayer)
