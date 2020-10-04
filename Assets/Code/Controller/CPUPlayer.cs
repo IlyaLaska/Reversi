@@ -5,7 +5,7 @@ public class CPUPlayer : IPlayer
     public CPUPlayer(PlayerEnum color)
     {
         this.color = color;
-        this.score = 0;
+        this.score = 2;
         this.isHuman = false;
     }
     public int score { get; set; }

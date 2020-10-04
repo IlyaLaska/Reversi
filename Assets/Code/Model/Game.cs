@@ -98,6 +98,8 @@ public class Game
 
     private void updateScore(int beatPiecesCount)
     {
+        Debug.Log("==========Cur Turn: " + currentPlayer.color);
+        Debug.Log("===========Old Score: B: " + black.score + " W: " + white.score);
         currentPlayer.score += beatPiecesCount + 1;
 
         if (currentPlayer == black)
@@ -105,6 +107,8 @@ public class Game
             white.score -= beatPiecesCount;
         }
         else black.score -= beatPiecesCount;
+        Debug.Log("===========New Score: B: " + black.score + " W: " + white.score);
+
     }
 
     private List<int[]> getMoveFromPlayer()

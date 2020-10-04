@@ -48,7 +48,7 @@ public class BoardUpdate : MonoBehaviour
             boardOProps = squares[XYDirection[1], XYDirection[0]].GetComponent<BoardSquareProperties>();
             if(!highlights[XYDirection[1], XYDirection[0]])
             {
-                Debug.Log("VALID MOVE X and Y: " + XYDirection[0] + " , " + XYDirection[1]);
+                //Debug.Log("VALID MOVE X and Y: " + XYDirection[0] + " , " + XYDirection[1]);
                 highlights[XYDirection[1], XYDirection[0]] = (GameObject)Instantiate(boardOProps.Highlight, boardOProps.transform.position, boardOProps.PieceOWhite.transform.rotation);
             }              
         }
@@ -70,7 +70,7 @@ public class BoardUpdate : MonoBehaviour
                 // clear highlights
                 if (highlights[y, x])
                 {
-                    Debug.Log("----------------------------------REMOVE highlight at X and Y: " + x + ", " + y);
+                    //Debug.Log("----------------------------------REMOVE highlight at X and Y: " + x + ", " + y);
                     DestroyImmediate(highlights[y, x], true);
                 }
 

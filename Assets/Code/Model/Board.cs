@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -212,7 +210,7 @@ public class Board
 
         foreach (var XYDirection in validMoves)
         {
-            Debug.Log("MADE MOVE   X:" + XYDirection[0] + " , Y:" + XYDirection[1] + " , DIRECTION: " + XYDirection[2] + ", " + XYDirection[3]);
+            //Debug.Log("MADE MOVE   X:" + XYDirection[0] + " , Y:" + XYDirection[1] + " , DIRECTION: " + XYDirection[2] + ", " + XYDirection[3]);
 
             if (currentTurn == PlayerEnum.black)
             {
@@ -224,7 +222,7 @@ public class Board
 
         if (boardUpdateEvent != null)
             boardUpdateEvent();
-        Debug.Log("ChangedPieces: " + changedPieces);
+        Debug.Log("===========ChangedPieces: " + changedPieces);
         return changedPieces;
     }
 
@@ -232,7 +230,7 @@ public class Board
     {
         //Debug.Log("ChangePiece  Y: " + (coordY) + ", X: " + (coordX));
         board[coordY, coordX].belongsToPlayer = colorCurrent;
-        changed++;
+        //changed++;
         //Debug.Log("belongsToPlayer " + (board[coordY - x, coordX - y].belongsToPlayer));
         //Debug.Log("Y: " + (coordY - x) + ", X: " + (coordX - y));
         while (board[coordY - x, coordX - y].belongsToPlayer == colorEnemy)

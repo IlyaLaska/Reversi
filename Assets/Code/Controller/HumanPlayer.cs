@@ -5,7 +5,7 @@ public class HumanPlayer : IPlayer
     public HumanPlayer(PlayerEnum color)
     {
         this.color = color;
-        this.score = 0;
+        this.score = 2;
         this.isHuman = true;
     }
     public bool isHuman { get; set; }
